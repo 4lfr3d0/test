@@ -21,8 +21,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        return view('home');
+    public function index() {
+        try {
+            return view('home');
+        } catch (\Exception $error) {
+            \Log::error('Error en el HomeController -> index(): ' . $error->getMessage());
+            abort(500, 'Error al mostrar la página');
+        }
     }
+
+    
 }

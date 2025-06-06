@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\client\ClientController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +22,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware(['auth'])->prefix('clients/')->group(function () {
+    Route::get('get/all', [ClientController::class, 'getAllClients']);
+    Route::post('save',   [ClientController::class, 'saveNewClient']);
+    Route::put('edit',    [ClientController::class, 'editClient']);
+    Route::delete('delete/{client_id}', [ClientController::class, 'deleteClient']);
+});
