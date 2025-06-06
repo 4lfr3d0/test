@@ -14,20 +14,24 @@
         <hr class="w-10 mx-auto">
     </div>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>Nombre completo</th>
-                <th>Domicilio</th>
-                <th>Correo</th>
-                <th>Teléfono</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="tbody_clients">
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover align-middle shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre completo</th>
+                    <th scope="col">Domicilio</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col" class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tbody_clients">
+            </tbody>
+        </table>
+    </div>
+    <div id="pagination-links" class="d-flex justify-content-center">
+    </div>
 
 </div>
 
@@ -36,12 +40,12 @@
 
 <script>
     const clientsList = [];
-    const getAllClients = async() => {
+    const getAllClients = async (url = '/clients/get/all') => {
         try {
-            const response = await fetch('/clients/get/all');
-            const {data }  = await response.json();
-            console.log('data ',data);
-            clientsList.splice(0, clientsList.length, ...data); 
+            const response = await fetch(url);
+            const { data } = await response.json();
+
+            clientsList.splice(0, clientsList.length, ...data.data);
 
             const tbody = document.getElementById('tbody_clients');
             tbody.innerHTML = '';
@@ -50,36 +54,70 @@
                 const tr = document.createElement('tr');
 
                 const fullName = client.user?.name || '---';
-                const address  = client.address || '---';
-                const email    = client.user?.email || '---';
-                const phone    = client.user?.phone || '---';
+                const address = client.address || '---';
+                const email = client.user?.email || '---';
+                const phone = client.user?.phone || '---';
 
                 tr.innerHTML = `
-                    <td>${i+1}</td>
+                    <td>${data.from + i}</td>
                     <td>${fullName}</td>
                     <td>${address}</td>
                     <td>${email}</td>
                     <td>${phone}</td>
                     <td>
-                        <button class="btn btn-sm btn-primary" onclick="editatClient(${client.id})">
-                            <i class="fas fa-edit"></i> Editar
-                        </button>
-                        <button class="btn btn-sm btn-danger" onclick="handleDeleteClient(${client.id}, '${client.user.name}')">
-                            <i class="fas fa-trash-alt"></i> Eliminar
-                        </button>
+                        <div class="d-flex flex-row gap-1 justify-content-center">
+                            <button class="btn btn-xs btn-warning d-flex align-items-center gap-1 py-0 px-2" style="font-size: 0.8rem; height: 28px;" onclick="editClient(${client.id})">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="btn btn-xs btn-danger d-flex align-items-center gap-1 py-0 px-2" style="font-size: 0.8rem; height: 28px;" onclick="handleDeleteClient(${client.id}, '${client.user?.name}')">
+                                <i class="fas fa-trash-alt"></i> Eliminar
+                            </button>
+                        </div>
                     </td>
                 `;
                 tbody.appendChild(tr);
-         });
-            
+            });
+
+            renderPagination(data);
+
         } catch (error) {
-            console.log('Ocurrió un error al mostrar los expositores ',error);
+            console.log('Ocurrió un error al mostrar los clientes ', error);
         }
     }
 
+    const renderPagination = (paginationData) => {
+        const paginationContainer = document.getElementById('pagination-links');
+        paginationContainer.innerHTML = '';
+
+        const ul = document.createElement('ul');
+        ul.className = 'pagination';
+
+        paginationData.links.forEach(link => {
+            const li = document.createElement('li');
+            li.className = `page-item ${link.active ? 'active' : ''} ${!link.url ? 'disabled' : ''}`;
+
+            const a = document.createElement('a');
+            a.className = 'page-link';
+            a.href = '#';
+            a.innerHTML = link.label;
+            if (link.url) {
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    getAllClients(link.url);
+                });
+            }
+
+            li.appendChild(a);
+            ul.appendChild(li);
+        });
+
+        paginationContainer.appendChild(ul);
+    }
+
+
     getAllClients();
 
-    const editatClient = (id) => {
+    const editClient = (id) => {
         const client = clientsList.find(c => c.id === id);
         console.log('Cliente seleccionado:', client);
 
@@ -101,7 +139,8 @@
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Si, eliminar!"
+            confirmButtonText: "Si, eliminar!",
+            cancelButtonText: 'Cancelar'
             }).then((result) => {
             if (result.isConfirmed) {
                 deleteClient(client_id);

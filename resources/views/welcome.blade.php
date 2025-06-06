@@ -25,7 +25,7 @@
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Inicio</a>
+                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Clientes</a>
                     @else
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Iniciar sesión</a>
 
@@ -36,10 +36,157 @@
                 </div>
             @endif
 
-            <div>
-                <h3>Página de inicio</h3>
-            </div>
+            <div class="container my-5">
+                <!-- HERO CARD -->
+                <div class="card shadow-lg border-0 mb-5">
+                    <div class="row g-0">
+                        <div class="col-md-6">
+                            <img src="https://images.unsplash.com/photo-1581579185169-7068e22e539b?auto=format&fit=crop&w=800&q=80" 
+                                class="img-fluid rounded-start" alt="Refrigerador moderno">
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center">
+                            <div class="card-body">
+                                <h2 class="card-title text-primary">¡Equipa tu hogar con lo mejor en Línea Blanca!</h2>
+                                <p class="card-text text-muted">Explora nuestra selección de refrigeradores, estufas, lavadoras y más con grandes descuentos.</p>
+                                <ul class="list-unstyled">
+                                    <li>✅ Envío gratis</li>
+                                    <li>✅ Garantía oficial</li>
+                                    <li>✅ Pagos a meses sin intereses</li>
+                                </ul>
+                                <a  class="btn btn-primary mt-3">Ver catálogo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- PRODUCTOS DESTACADOS -->
+                <h3 class="mb-4 text-center">Productos destacados</h3>
+                <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="https://images.unsplash.com/photo-1622820844934-5ce8a1c043f6?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Lavadora">
+                            <div class="card-body">
+                                <h5 class="card-title">Lavadora Automática 20kg</h5>
+                                <p class="card-text">Tecnología eficiente con múltiples ciclos de lavado.</p>
+                                <span class="text-success fw-bold">$8,999 MXN</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="https://images.unsplash.com/photo-1586201375761-83865001e17b?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Refrigerador">
+                            <div class="card-body">
+                                <h5 class="card-title">Refrigerador Duplex</h5>
+                                <p class="card-text">Diseño moderno y bajo consumo de energía.</p>
+                                <span class="text-success fw-bold">$12,500 MXN</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="https://images.unsplash.com/photo-1616627987883-cd48b098f4cd?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Estufa">
+                            <div class="card-body">
+                                <h5 class="card-title">Estufa 6 Quemadores</h5>
+                                <p class="card-text">Ideal para familias grandes. Acabado de acero inoxidable.</p>
+                                <span class="text-success fw-bold">$7,299 MXN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container my-5">
+                <!-- HERO CARD -->
+                <div class="card shadow-lg border-0 mb-5">
+                    <div class="row g-0">
+                        <div class="col-md-6">
+                            <img src="https://images.unsplash.com/photo-1581579185169-7068e22e539b?auto=format&fit=crop&w=800&q=80" 
+                                class="img-fluid rounded-start" alt="Refrigerador moderno">
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center">
+                            <div class="card-body">
+                                <h2 class="card-title text-primary">¡Equipa tu hogar con lo mejor en Línea Blanca!</h2>
+                                <p class="card-text text-muted">Explora nuestra selección de refrigeradores, estufas, lavadoras y más con grandes descuentos.</p>
+                                <ul class="list-unstyled">
+                                    <li>✅ Envío gratis</li>
+                                    <li>✅ Garantía oficial</li>
+                                    <li>✅ Pagos a meses sin intereses</li>
+                                </ul>
+                                <a class="btn btn-primary mt-3">Ver catálogo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRODUCTOS DESTACADOS -->
+                <h3 class="mb-4 text-center">Productos destacados</h3>
+                <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="https://images.unsplash.com/photo-1622820844934-5ce8a1c043f6?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Lavadora">
+                            <div class="card-body">
+                                <h5 class="card-title">Lavadora Automática 20kg</h5>
+                                <p class="card-text">Tecnología eficiente con múltiples ciclos de lavado.</p>
+                                <span class="text-success fw-bold">$8,999 MXN</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="https://images.unsplash.com/photo-1586201375761-83865001e17b?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Refrigerador">
+                            <div class="card-body">
+                                <h5 class="card-title">Refrigerador Duplex</h5>
+                                <p class="card-text">Diseño moderno y bajo consumo de energía.</p>
+                                <span class="text-success fw-bold">$12,500 MXN</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="https://images.unsplash.com/photo-1616627987883-cd48b098f4cd?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Estufa">
+                            <div class="card-body">
+                                <h5 class="card-title">Estufa 6 Quemadores</h5>
+                                <p class="card-text">Ideal para familias grandes. Acabado de acero inoxidable.</p>
+                                <span class="text-success fw-bold">$7,299 MXN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TESTIMONIOS -->
+                <h3 class="mb-4 text-center">Lo que dicen nuestros clientes</h3>
+                <div class="row mb-5">
+                    <div class="col-md-4">
+                        <blockquote class="blockquote">
+                            <p>"Excelente calidad, el refrigerador llegó súper rápido y en perfecto estado."</p>
+                            <footer class="blockquote-footer">María López</footer>
+                        </blockquote>
+                    </div>
+                    <div class="col-md-4">
+                        <blockquote class="blockquote">
+                            <p>"Compré una lavadora y funciona de maravilla. La atención al cliente es muy buena."</p>
+                            <footer class="blockquote-footer">Carlos Ramírez</footer>
+                        </blockquote>
+                    </div>
+                    <div class="col-md-4">
+                        <blockquote class="blockquote">
+                            <p>"¡Gracias por las promociones! Compré toda la línea blanca para mi casa nueva."</p>
+                            <footer class="blockquote-footer">Ana Torres</footer>
+                        </blockquote>
+                    </div>
+                </div>
+
+                <!-- CALL TO ACTION -->
+                <div class="text-center bg-primary text-white p-5 rounded shadow">
+                        <h2 class="mb-3">¿Listo para renovar tu hogar?</h2>
+                        <p>Compra hoy y aprovecha nuestros precios de temporada. Todo con envío seguro y rápido.</p>
+                        <a class="btn btn-light mt-2">Comprar ahora</a>
+                    </div>
+                </div>
+
+
+        
+            </div>
+            
         </div>
     </body>
 </html>

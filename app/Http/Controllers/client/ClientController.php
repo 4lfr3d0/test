@@ -14,7 +14,7 @@ class ClientController extends Controller {
     
     public function getAllClients() {
         try {
-            $clients = Client::with('user')->get();
+            $clients = Client::with('user')->paginate(10);
 
             return  response()->json(['ok'=>true, 'msg'=>'Petición realizada correctamente', 'data'=>$clients], 200);
         } catch (\Exception $error) {
@@ -40,28 +40,6 @@ class ClientController extends Controller {
              \Log::error('Error en el ClientController -> saveNewClient(): ' . $error->getMessage());
             return  response()->json(['ok'=>false, 'msg'=>'Error al guardar el cliente'], 500);
         }
-    }
-
-    public function verifyDataToSave($request) {
-        $requiredFields = ['name', 'last_name', 'phone', 'email', 'address'];
-
-        foreach ($requiredFields as $field) {
-            if (!$request->filled($field)) { 
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public function verifyDataToEdit($request) {
-        $requiredFields = ['name', 'phone', 'address'];
-
-        foreach ($requiredFields as $field) {
-            if (!$request->filled($field)) { 
-                return false;
-            }
-        }
-        return true;
     }
 
     public function saveClient($request, $user_id) {
@@ -111,7 +89,7 @@ class ClientController extends Controller {
             if (!$isRight) return response()->json(['ok' => false, 'msg' => 'Faltan datos por completar.'], 409);
 
             $client = Client::findOrFail($request->client_id);
-            $user = $client->user;
+            $user   = $client->user;
 
             $user->name  = $request->name;
             $user->phone = $request->phone;
@@ -139,11 +117,33 @@ class ClientController extends Controller {
                 $user->delete();
             }
 
-            return response()->json(['ok' => true, 'msg' => 'Cliente eliminado correctamente']);
+            return response()->json(['ok' => true, 'msg' => 'Cliente eliminado correctamente'], 200);
         } catch (\Exception $e) {
             \Log::error('Error al eliminar cliente ClientController -> deleteClient() : ' . $e->getMessage());
             return response()->json(['ok' => false, 'msg' => 'Error al eliminar cliente'], 500);
         }
+    }
+
+    public function verifyDataToSave($request) {
+        $requiredFields = ['name', 'last_name', 'phone', 'email', 'address'];
+
+        foreach ($requiredFields as $field) {
+            if (!$request->filled($field)) { 
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public function verifyDataToEdit($request) {
+        $requiredFields = ['name', 'phone', 'address'];
+
+        foreach ($requiredFields as $field) {
+            if (!$request->filled($field)) { 
+                return false;
+            }
+        }
+        return true;
     }
 
 }
