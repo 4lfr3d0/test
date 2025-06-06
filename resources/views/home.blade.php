@@ -5,8 +5,13 @@
 
     <div class="d-flex justify-content-end mb-3">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Agregar nuevo cliente
+            <i class="fas fa-add"></i> Agregar nuevo cliente
         </button>
+    </div>
+
+    <div class="mb-4 text-center">
+        <h2 class="fw-bold text-primary">Lista de clientes de la empresa</h2>
+        <hr class="w-10 mx-auto">
     </div>
 
     <table class="table table-bordered">
@@ -56,8 +61,12 @@
                     <td>${email}</td>
                     <td>${phone}</td>
                     <td>
-                        <button class="btn btn-sm btn-primary" onclick="editatClient(${client.id})">Editar</button>
-                        <button class="btn btn-sm btn-danger" onclick="handleDeleteClient(${client.id}, '${client.user.name}')">Eliminar</button>
+                        <button class="btn btn-sm btn-primary" onclick="editatClient(${client.id})">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="handleDeleteClient(${client.id}, '${client.user.name}')">
+                            <i class="fas fa-trash-alt"></i> Eliminar
+                        </button>
                     </td>
                 `;
                 tbody.appendChild(tr);
